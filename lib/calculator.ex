@@ -6,15 +6,7 @@ defmodule Calculator do
     calculate(String.to_integer(a), String.to_integer(b), operator)
   end
 
-  defp calculate(a, b, "+") do
-    a + b
-  end
-
-  defp calculate(a, b, "-") do
-    a - b
-  end
-
-  defp calculate(a, b, "*") do
-    a * b
-  end
+  defp calculate(a, b, "+"), do: a + b
+  defp calculate(a, b, "-"), do: a - b
+  defp calculate(a, b, "*"), do: a * b
 end
