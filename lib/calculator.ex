@@ -9,11 +9,15 @@ defmodule Calculator do
     calculate(String.to_integer(a), String.to_integer(b), operator)
   end
 
-  defp calculate(a, b, operator) do
-    case operator do
-      "+" -> a + b
-      "-" -> a - b
-      "*" -> a * b
-    end
+  defp calculate(a, b, "+") do
+    a + b
+  end
+
+  defp calculate(a, b, "-") do
+    a - b
+  end
+
+  defp calculate(a, b, "*") do
+    a * b
   end
 end
