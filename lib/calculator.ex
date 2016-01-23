@@ -10,16 +10,10 @@ defmodule Calculator do
   end
 
   defp calculate(a, b, operator) do
-    if operator == "+" do
-      a + b
-    else
-      if operator == "-" do
-        a - b
-      else
-        if operator == "*" do
-          a * b
-        end
-      end
+    case operator do
+      "+" -> a + b
+      "-" -> a - b
+      "*" -> a * b
     end
   end
 end
