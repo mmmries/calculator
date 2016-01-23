@@ -9,4 +9,12 @@ defmodule CalculatorTest do
   test "calculate different addition" do
     assert Calculator.evaluate("1+2") == 3
   end
+
+  test "calculate a basic subtraction expression" do
+    assert Calculator.evaluate("5 - 6") == -1
+  end
+
+  test "basic multiplication" do
+    assert Calculator.evaluate("7 * 8") == 56
+  end
 end
