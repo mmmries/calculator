@@ -2,10 +2,7 @@ defmodule Calculator do
   @regex ~r{(\d+)\s*([\+\-\*])\s*(\d+)}
 
   def evaluate(expression) do
-    matches = Regex.run(@regex, expression)
-    a = Enum.at(matches, 1)
-    operator = Enum.at(matches, 2)
-    b = Enum.at(matches, 3)
+    [_match, a, operator, b] = Regex.run(@regex, expression)
     calculate(String.to_integer(a), String.to_integer(b), operator)
   end
 
