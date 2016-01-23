@@ -17,4 +17,9 @@ defmodule CalculatorTest do
   test "basic multiplication" do
     assert Calculator.evaluate("7 * 8") == 56
   end
+
+  @tag :pending
+  test "parenthesized expression" do
+    assert Calculator.evaluate("1 + (2 * 3) - (4 * 5)") == -13
+  end
 end
