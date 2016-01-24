@@ -1,12 +1,14 @@
 defmodule Calculator.Tokenizer do
   def tokenize(str) do
     str
-    |> String.split(~r/\b/)
+    |> String.split(~r/[\b ]/)
     |> Enum.map(&convert_chunk/1)
     |> Enum.reject(&is_nil/1)
   end
 
   def convert_chunk(""), do: nil
+  def convert_chunk("("), do: :open_parenthesis
+  def convert_chunk(")"), do: :close_parenthesis
   def convert_chunk("+"), do: {:operator, :plus}
   def convert_chunk("-"), do: {:operator, :minus}
   def convert_chunk("*"), do: {:operator, :multiply}

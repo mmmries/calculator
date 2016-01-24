@@ -14,6 +14,10 @@ defmodule Calculator.TokenizerTest do
   end
 
   test "tokenize a basic addition" do
-    assert Tokenizer.tokenize("31+88") == [31, {:operator, :plus}, 88]
+    assert Tokenizer.tokenize("31 + 88") == [31, {:operator, :plus}, 88]
+  end
+
+  test "tokenize paranethesized expression" do
+    assert Tokenizer.tokenize("( 8 / 5 ) + 3") == [:open_parenthesis, 8, {:operator, :divide}, 5, :close_parenthesis, {:operator, :plus}, 3]
   end
 end
