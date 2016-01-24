@@ -1,5 +1,8 @@
 defmodule Calculator.Parser do
-  def parse([a, {:operator, op}, b]) when is_number(a) and is_number(b) do
-    {op, a, b}
+  def parse([a, {:operator, op} | rest]) do
+    {op, parse([a]), parse(rest)}
+  end
+  def parse([a]) when is_number(a) do
+    a
   end
 end
