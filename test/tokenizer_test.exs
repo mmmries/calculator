@@ -3,10 +3,14 @@ defmodule Calculator.TokenizerTest do
   alias Calculator.Tokenizer
 
   test "tokenize a literal" do
-    assert Tokenizer.tokenize("58") == [58]
+    assert Tokenizer.tokenize("5") == [5]
   end
 
   test "tokenize an operator" do
     assert Tokenizer.tokenize("+") == [{:operator, :plus}]
+  end
+
+  test "tokenize a basic addition" do
+    assert Tokenizer.tokenize("31+88") == [31, {:operator, :plus}, 88]
   end
 end
