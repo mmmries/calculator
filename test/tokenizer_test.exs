@@ -6,8 +6,11 @@ defmodule Calculator.TokenizerTest do
     assert Tokenizer.tokenize("5") == [5]
   end
 
-  test "tokenize an operator" do
+  test "tokenize operators" do
     assert Tokenizer.tokenize("+") == [{:operator, :plus}]
+    assert Tokenizer.tokenize("-") == [{:operator, :minus}]
+    assert Tokenizer.tokenize("*") == [{:operator, :multiply}]
+    assert Tokenizer.tokenize("/") == [{:operator, :divide}]
   end
 
   test "tokenize a basic addition" do

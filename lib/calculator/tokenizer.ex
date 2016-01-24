@@ -8,5 +8,8 @@ defmodule Calculator.Tokenizer do
 
   def convert_chunk(""), do: nil
   def convert_chunk("+"), do: {:operator, :plus}
+  def convert_chunk("-"), do: {:operator, :minus}
+  def convert_chunk("*"), do: {:operator, :multiply}
+  def convert_chunk("/"), do: {:operator, :divide}
   def convert_chunk(str), do: String.to_integer(str)
 end
