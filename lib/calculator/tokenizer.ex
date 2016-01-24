@@ -1,8 +1,8 @@
 defmodule Calculator.Tokenizer do
   def tokenize(str) do
     chunks = String.split(str, ~r/\b/)
-    tokens = Enum.map(chunks, fn(chunk) -> convert_chunk(chunk) end)
-    Enum.reject(tokens, fn(token) -> is_nil(token) end)
+    tokens = Enum.map(chunks, &convert_chunk/1)
+    Enum.reject(tokens, &is_nil/1)
   end
 
   def convert_chunk(""), do: nil
