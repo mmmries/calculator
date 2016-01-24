@@ -5,4 +5,8 @@ defmodule Calculator.TokenizerTest do
   test "tokenize a literal" do
     assert Tokenizer.tokenize("58") == [58]
   end
+
+  test "tokenize an operator" do
+    assert Tokenizer.tokenize("+") == [{:operator, :plus}]
+  end
 end
