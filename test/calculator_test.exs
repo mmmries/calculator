@@ -18,6 +18,10 @@ defmodule CalculatorTest do
     assert Calculator.evaluate("7 * 8") == 56
   end
 
+  test "basic division" do
+    assert Calculator.evaluate("14 / 2") == 7.0
+  end
+
   test "parenthesized expression" do
     assert Calculator.evaluate("1 + ( 2 * 3 ) - ( 4 * 5 )") == -13
   end

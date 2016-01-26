@@ -42,10 +42,10 @@ defmodule Calculator.Parser do
     split_on([], operators, tokens)
   end
 
-  defp split_on(left, _operators, []), do: left
+  defp split_on(left, _operators, []), do: Enum.reverse(left)
   defp split_on(left, operators, [{:operator, op} | rest]) do
     if op in operators do
-      {left, op, rest}
+      {Enum.reverse(left), op, rest}
     else
       split_on([{:operator, op}|left], operators, rest)
     end
