@@ -1,12 +1,8 @@
 defmodule Calculator do
-  @regex ~r{(\d+)\s*([\+\-\*])\s*(\d+)}
-
   def evaluate(expression) do
-    [_match, a, operator, b] = Regex.run(@regex, expression)
-    calculate(String.to_integer(a), String.to_integer(b), operator)
+    expression
+    |> Calculator.Tokenizer.tokenize
+    |> Calculator.Parser.parse
+    |> Calculator.Evaluator.evaluate
   end
-
-  defp calculate(a, b, "+"), do: a + b
-  defp calculate(a, b, "-"), do: a - b
-  defp calculate(a, b, "*"), do: a * b
 end
