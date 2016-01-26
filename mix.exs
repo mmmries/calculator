@@ -7,6 +7,7 @@ defmodule Calculator.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     aliases: aliases,
      deps: deps]
   end
 
@@ -15,6 +16,12 @@ defmodule Calculator.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [applications: [:logger]]
+  end
+
+  defp aliases do
+    [
+      calculator: ["compile", &repl/1]
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -28,5 +35,12 @@ defmodule Calculator.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     []
+  end
+
+  defp repl(_) do
+    expression = IO.gets("> ") |> String.strip
+    result = Calculator.evaluate(expression)
+    IO.puts "  => #{result}"
+    repl(nil)
   end
 end
