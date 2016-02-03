@@ -1,4 +1,6 @@
 defmodule Calculator.Parser do
+  def parse([a]) when is_number(a), do: a
+  def parse([{_operation, _left, _right}=ast]), do: ast
   def parse(tokens) do
     tokens
     |> collapse_parens
@@ -14,8 +16,6 @@ defmodule Calculator.Parser do
     [head | collapse_parens(tail)]
   end
 
-  defp parse_operations([{_operation, _left, _right}=ast]), do: ast
-  defp parse_operations([a]) when is_number(a), do: a
   defp parse_operations(tokens) do
     case split_on(tokens, [:plus, :minus]) do
       {left, operator, right} ->
@@ -28,6 +28,9 @@ defmodule Calculator.Parser do
 
   defp scan_for_matching_parenthesis([:close_parenthesis | tail], 0, inside_parens) do
     {Enum.reverse(inside_parens), tail}
+  end
+  defp scan_for_matching_parenthesis([:open_parenthesis | tail], depth, inside_parens) do
+    scan_for_matching_parenthesis(tail, depth+1, [:open_parenthesis | inside_parens])
   end
   defp scan_for_matching_parenthesis([:close_parenthesis | tail], depth, inside_parens) do
     scan_for_matching_parenthesis(tail, depth-1, [:close_parenthesis | inside_parens])

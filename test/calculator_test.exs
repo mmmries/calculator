@@ -25,4 +25,8 @@ defmodule CalculatorTest do
   test "parenthesized expression" do
     assert Calculator.evaluate("1 + ( 2 * 3 ) - ( 4 * 5 )") == -13
   end
+
+  test "nested parentheses" do
+    assert Calculator.evaluate("25 + ( ( 8 + 5 ) * 2 ) + 1 * 3") == 54
+  end
 end

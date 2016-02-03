@@ -2,6 +2,10 @@ defmodule Calculator.ParserTest do
   use ExUnit.Case, async: true
   alias Calculator.Parser
 
+  test "handles a simple number" do
+    assert Parser.parse([5]) == 5
+  end
+
   test "structures a basic operation" do
     tokens = [8,{:operator, :plus}, 9]
     assert Parser.parse(tokens) == {:plus, 8, 9}
@@ -46,5 +50,25 @@ defmodule Calculator.ParserTest do
     ]
 
     assert Parser.parse(tokens) == {:plus, {:multiply, {:plus, 1, 8}, 8}, 1}
+  end
+
+  test "nested parentheses support" do
+    tokens = [
+      2,
+      {:operator, :minus},
+      :open_parenthesis,
+      8,
+      {:operator, :divide},
+      :open_parenthesis,
+      6,
+      {:operator, :minus},
+      2,
+      :close_parenthesis,
+      :close_parenthesis,
+      {:operator, :plus},
+      3,
+    ]
+
+    assert Parser.parse(tokens) == {:minus, 2, {:plus, {:divide, 8, {:minus, 6, 2}}, 3}}
   end
 end
