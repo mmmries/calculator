@@ -29,4 +29,8 @@ defmodule CalculatorTest do
   test "nested parentheses" do
     assert Calculator.evaluate("25 + ( ( 8 + 5 ) * 2 ) + 1 * 3") == 54
   end
+
+  test "ordered operations" do
+    assert Calculator.evaluate("10 - 3 - 2 - 1") == 4
+  end
 end

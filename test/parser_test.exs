@@ -19,21 +19,21 @@ defmodule Calculator.ParserTest do
       {:operator, :minus},
       3
     ]
-    assert Parser.parse(tokens) == {:plus, 1, {:minus, 2, 3}}
+    assert Parser.parse(tokens) == {:minus, {:plus, 1, 2}, 3}
   end
 
   test "order of operations" do
     tokens = [
       1,
-      {:operator, :plus},
+      {:operator, :minus},
       8,
       {:operator, :multiply},
       8,
-      {:operator, :plus},
+      {:operator, :minus},
       1
     ]
 
-    assert Parser.parse(tokens) == {:plus, 1, {:plus, {:multiply, 8, 8}, 1}}
+    assert Parser.parse(tokens) == {:minus, {:minus, 1, {:multiply, 8, 8}}, 1}
   end
 
   test "parentheses change the order of operations" do
