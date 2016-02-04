@@ -36,7 +36,6 @@ defmodule Calculator.ParserTest do
     assert Parser.parse(tokens) == {:minus, {:minus, 1, {:multiply, 8, 8}}, 1}
   end
 
-  @tag :pending
   test "parentheses change the order of operations" do
     tokens = [
       :open_parenthesis,
