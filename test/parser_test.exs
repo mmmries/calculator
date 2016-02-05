@@ -14,12 +14,12 @@ defmodule Calculator.ParserTest do
   test "nests multiple operations" do
     tokens = [
       1,
-      {:operator, :plus},
-      2,
       {:operator, :minus},
+      2,
+      {:operator, :plus},
       3
     ]
-    assert Parser.parse(tokens) == {:minus, {:plus, 1, 2}, 3}
+    assert Parser.parse(tokens) == {:plus, {:minus, 1, 2}, 3}
   end
 
   test "order of operations" do
@@ -69,6 +69,6 @@ defmodule Calculator.ParserTest do
       3,
     ]
 
-    assert Parser.parse(tokens) == {:minus, 2, {:plus, {:divide, 8, {:minus, 6, 2}}, 3}}
+    assert Parser.parse(tokens) == {:plus, {:minus, 2, {:divide, 8, {:minus, 6, 2}}}, 3}
   end
 end

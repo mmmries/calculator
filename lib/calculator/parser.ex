@@ -4,19 +4,22 @@ defmodule Calculator.Parser do
   def parse(tokens) do
     [ast] = tokens
             |> collapse_parens
-            |> collapse_operator(:divide)
-            |> collapse_operator(:multiply)
-            |> collapse_operator(:plus)
-            |> collapse_operator(:minus)
+            |> collapse_operators([:divide, :multiply])
+            |> collapse_operators([:plus, :minus])
     ast
   end
 
-  defp collapse_operator([], _op), do: []
-  defp collapse_operator([left, {:operator, operator}, right | rest], operator) do
-    collapse_operator([{operator, left, right} | rest], operator)
+  defp collapse_operators([], _op), do: []
+  defp collapse_operators([left, {:operator, operator}, right | rest]=tokens, operators) do
+    case operator in operators do
+      true -> collapse_operators([{operator, left, right} | rest], operators)
+      false ->
+        [head | rest] = tokens
+        [head | collapse_operators(rest, operators)]
+    end
   end
-  defp collapse_operator([head | rest], operator) do
-    [head | collapse_operator(rest, operator)]
+  defp collapse_operators([head | rest], operators) do
+    [head | collapse_operators(rest, operators)]
   end
 
   defp collapse_parens([]), do: []
